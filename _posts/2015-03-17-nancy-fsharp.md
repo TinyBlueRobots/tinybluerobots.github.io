@@ -51,17 +51,14 @@ This is much more pleasing, and we can build up a testable library of functions 
 
 Next we just have to wire them up. Fear not, I've written the boiler plate for you so we just have to do a bit of composition:
 
-    type Routes() as this =
+    type Routes() as this = 
       inherit NancyFsModule()
-
-      do
-        Home.get |> this.CreateRoute GET "/"
-        (fun p -> p?name |> Hello.get) |> this.CreateRoute GET "/hello/{name}"
-
-        //Here I'm ignoring the parameters
-        (fun _ -> About.get()) |> this.CreateRoute GET "/about"
-
-        this.Bind<LoginModel>() |> Login.post |> this.CreateRoute POST "/login"
+      do 
+        (fun _ -> Home.get()) |> this.CreateRoute GET "/"
+        (fun _ -> this.Bind<NameModel>() |> Home.post) |> this.CreateRoute POST "/"
+        (fun _ -> this.Request.Query?name |> About.get) |> this.CreateRoute GET "/about"
+        StaticFile.get |> this.CreateRoute GET "/{file}"
+        (fun p -> p?redirect |> Redirect.get) |> this.CreateRoute GET "/redirect/{redirect}"
 
 Async? Got you covered there too, just return an async from your function and use:
 
