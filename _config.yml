@@ -1,0 +1,12 @@
+# Site settings
+title: Tiny Blue Robots
+email: info@tinybluerobots.com
+description: > # this means to ignore newlines until "baseurl:"
+  Technical witterings from TBR HQ
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://tinybluerobots.github.io" # the base hostname & protocol for your site
+twitter_username: tinybluerobots
+github_username:  tinybluerobots
+
+# Build settings
+markdown: kramdown
