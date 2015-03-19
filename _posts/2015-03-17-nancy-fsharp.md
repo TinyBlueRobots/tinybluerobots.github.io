@@ -47,7 +47,9 @@ Next, those dynamic parameters. F# has the ? operator for just this job, and we 
           ddv.Value |> unbox<'a> |> Some
         with :? InvalidCastException -> None
 
-This is much more pleasing, and we can carry on like this and build a testable library of functions without even thinking too much about Nancy. Next we just have to wire them up. Fear not, I've written the boiler plate for you in ```NancyFsModule```, so we just have to do a bit of composition:
+This is much more pleasing, and we can build up a testable library of functions without even thinking too much about Nancy. Here are some example [```Modules```](https://github.com/TinyBlueRobots/NancyFs/blob/master/src/NancyFs/Modules/Modules.fs).
+
+Next we just have to wire them up. Fear not, I've written the boiler plate for you so we just have to do a bit of composition:
 
     type Routes() as this =
       inherit NancyFsModule()
@@ -69,11 +71,11 @@ In this case the function will also require a cancellationToken parameter.
 
 Before you embark on this adventure, ensure you have F# Power Tools installed for folder creation and manipulation, and you've installed [these registry extensions](http://bloggemdano.blogspot.co.uk/2013/11/adding-new-items-to-pure-f-aspnet.html) so you can create files. Now clone this and get going:
 
-[https://github.com/JonCanning/NancyFs](https://github.com/JonCanning/NancyFs)
+[https://github.com/tinybluerobots/nancyfs](https://github.com/tinybluerobots/nancyfs)
 
-Have a look at ```Nancy.fs``` and you'll see the ```Response``` type with a few implementations; simply adjust to your needs.
+Have a look at [```Nancy.fs```](https://github.com/TinyBlueRobots/NancyFs/blob/master/src/NancyFs/Modules/Nancy.fs) and you'll see the ```Response``` type with a few implementations; simply adjust to your needs.
 ```NancyFsModule``` is the carpet under which we are sweeping all the unpleasantness, and the  ```Nancify``` method is where we convert the ```Response``` into something Nancy can consume.
 
 We're using this in production, and with FsPickler and fszmq to talk to the back end we get the benefit of F# everywhere.
 
-Let me know what you think and if you can improve what we've done.
+Let me know what you think and if you can improve on what we've done.
