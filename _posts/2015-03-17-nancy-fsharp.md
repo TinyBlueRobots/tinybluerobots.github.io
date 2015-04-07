@@ -39,13 +39,10 @@ Nice. Next we need to handle view models, which are optional, so let's update th
 Next, those dynamic parameters. F# has the ? operator for just this job, and we can clean up those dirty nulls:
 
     let (?) (p : obj) prop = 
-      let ddv = (p :?> DynamicDictionary).[prop] :?> DynamicDictionaryValue
-      match ddv.HasValue with
-      | false -> None
-      | _ -> 
-        try 
-          ddv.Value |> unbox<'a> |> Some
-        with :? InvalidCastException -> None
+        let ddv = (p :?> DynamicDictionary).[prop] :?> DynamicDictionaryValue
+        match ddv.HasValue with
+        | false -> None
+        | _ -> ddv.TryParse<'a>() |> Some
 
 This is much more pleasing, and we can build up a testable library of functions without even thinking too much about Nancy. Here are some example [```Modules```](https://github.com/TinyBlueRobots/NancyFs/blob/master/src/NancyFs/Modules/Modules.fs).
 
