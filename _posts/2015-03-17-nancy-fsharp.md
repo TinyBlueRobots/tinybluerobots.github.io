@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "NancyFx |> F#"
-date:   2015-03-17 15:45:22
+title:  NancyFx |> F#
+date:   2015-03-17
 categories: fsharp
 ---
 So you want to build a website and, since you are a god amongst men, you want to use F#. Good, then I don't have to tell you how excellent [Nancy](http://nancyfx.org/) is, however, if you've used it with F# you’ve probably winced a little:
@@ -38,7 +38,7 @@ Nice. Next we need to handle view models, which are optional, so let's update th
 
 Next, those dynamic parameters. F# has the ? operator for just this job, and we can clean up those dirty nulls:
 
-    let (?) (p : obj) prop = 
+    let (?) (p : obj) prop =
         let ddv = (p :?> DynamicDictionary).[prop] :?> DynamicDictionaryValue
         match ddv.HasValue with
         | false -> None
@@ -48,9 +48,9 @@ This is much more pleasing, and we can build up a testable library of functions 
 
 Next we just have to wire them up. Fear not, I've written the boiler plate for you so we just have to do a bit of composition:
 
-    type Routes() as this = 
+    type Routes() as this =
       inherit NancyFsModule()
-      do 
+      do
         (fun _ -> Home.get()) |> this.CreateRoute GET "/"
         (fun _ -> this.Bind<NameModel>() |> Home.post) |> this.CreateRoute POST "/"
         (fun _ -> this.Request.Query?name |> About.get) |> this.CreateRoute GET "/about"
