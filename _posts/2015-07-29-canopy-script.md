@@ -10,7 +10,7 @@ Sometimes when you're developing a website you can get caught in a slow feedback
 
 I've saved you the job of downloading and setting everything up, you just need to have F# installed, create a directory for your scripts, then download and run this using fsi:
 
-https://github.com/TinyBlueRobots/CanopyScript/blob/master/install.fsx
+[https://github.com/TinyBlueRobots/CanopyScript/blob/master/install.fsx](https://github.com/TinyBlueRobots/CanopyScript/blob/master/install.fsx)
 
 This will install Canopy, and create a couple of files: ```refs.fsx``` and ```demo.fsx```. This is ```demo.fsx```:
 
